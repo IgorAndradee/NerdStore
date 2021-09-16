@@ -42,25 +42,25 @@ namespace NerdStore.Vendas.Data
             }
 
             var sucesso = await base.SaveChangesAsync() > 0;
-            //if (sucesso) await _mediatorHandler.PublicarEventos(this);
+            if (sucesso) await _mediatorHandler.PublicarEventos(this);
 
             return sucesso;
         }
 
-        //protected override void OnModelCreating(ModelBuilder modelBuilder)
-        //{
-        //    foreach (var property in modelBuilder.Model.GetEntityTypes().SelectMany(
-        //        e => e.GetProperties().Where(p => p.ClrType == typeof(string))))
-        //        property.Relational().ColumnType = "varchar(100)";
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            foreach (var property in modelBuilder.Model.GetEntityTypes().SelectMany(
+                e => e.GetProperties().Where(p => p.ClrType == typeof(string))))
+                property.Relational().ColumnType = "varchar(100)";
 
-        //    modelBuilder.Ignore<Event>();
+            modelBuilder.Ignore<Event>();
 
-        //    modelBuilder.ApplyConfigurationsFromAssembly(typeof(VendasContext).Assembly);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(VendasContext).Assembly);
 
-        //    foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys())) relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
+            foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys())) relationship.DeleteBehavior = DeleteBehavior.ClientSetNull;
 
-        //    modelBuilder.HasSequence<int>("MinhaSequencia").StartsAt(1000).IncrementsBy(1);
-        //    base.OnModelCreating(modelBuilder);
-        //}
+            modelBuilder.HasSequence<int>("MinhaSequencia").StartsAt(1000).IncrementsBy(1);
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
