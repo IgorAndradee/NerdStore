@@ -1,7 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using NerdStore.Vendas.Application.Queries;
+using System;
+using System.Threading.Tasks;
 
 namespace NerdStore.WebApp.MVC.Extensions
 {
